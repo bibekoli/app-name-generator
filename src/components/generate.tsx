@@ -9,7 +9,7 @@ export default function Generate() {
   const [endWith, setEndWith] = useState("");
   const [length, setLength] = useState(5);
   const [allowRepeat, setAllowRepeat] = useState(false);
-  const [result, setResult] = useState("hehe");
+  const [result, setResult] = useState("");
   const [favorite, setFavorite] = useCookies(["favorite"]);
   const [history, setHistory] = useCookies(["history"]);
 
