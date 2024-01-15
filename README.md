@@ -1,4 +1,4 @@
-#App Name Generator
+## App Name Generator
 
 ## Description
 A simple app that generates unique random names. The name can be used for naming your pet or a your new app :D
