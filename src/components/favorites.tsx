@@ -14,6 +14,14 @@ export default function Favorite() {
     <>
       <ul className="flex flex-col h-full overflow-y-scroll">
         {
+          favorite["favorite"]?.length > 0 && (
+            <button className="flex items-center gap-2 justify-center p-2 m-2 text-lg font-bold rounded-lg px-2 bg-red-500 text-white" onClick={() => setFavorite("favorite", [], { path: "/" })}>
+              <Icon icon="akar-icons:trash-can" />
+              Clear All
+            </button>
+          )
+        }
+        {
           favorite["favorite"]?.map((name: string, index: number) => (
             <li className="flex flex-row justify-between items-center m-2 p-2 bg-gray-100 rounded-lg border-b" key={index}>
                 <p className="text-lg font-bold">{name}</p>
