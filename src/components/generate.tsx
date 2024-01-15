@@ -126,7 +126,10 @@ export default function Generate() {
           Generate
         </button>
 
-        <button className="flex items-center p-2 my-2 text-lg font-bold rounded-lg px-2 bg-red-500 hover:bg-red-600 active:bg-red-500 text-white" onClick={addToFavorite}>
+        <button
+          className="flex items-center p-2 my-2 text-lg font-bold rounded-lg px-2 bg-red-500 hover:bg-red-600 active:bg-red-500 disabled:bg-gray-200 disabled:text-gray-800 text-white"
+          disabled={favorite["favorite"] && favorite["favorite"].includes(result)}
+          onClick={addToFavorite}>
           <Icon icon="ic:round-favorite" className="inline-block w-6 h-6" />
           Favorite
         </button>
