@@ -7,6 +7,7 @@ import { useCookies } from "react-cookie";
 export default function Generate() {
   const [startWith, setStartWith] = useState("");
   const [endWith, setEndWith] = useState("");
+  const [exclude, setExclude] = useState([""]);
   const [length, setLength] = useState(8);
   const [allowRepeat, setAllowRepeat] = useState(false);
   const [result, setResult] = useState("");
@@ -19,9 +20,9 @@ export default function Generate() {
 
   function generate() {
     const getRandomChar = () => {
-      const alphabet = "abcdefghijklmnopqrstuvwxyz";
-      const randomIndex = Math.floor(Math.random() * alphabet.length);
-      return alphabet[randomIndex];
+      let alphabet = "abcdefghijklmnopqrstuvwxyz";
+      alphabet = alphabet.replace(new RegExp(`[${exclude.join("")}]`, "g"), "");
+      return alphabet[Math.floor(Math.random() * alphabet.length)];
     };
     let result = startWith;
     while (result.length < length - endWith.length) {
@@ -57,31 +58,49 @@ export default function Generate() {
 
   return (
     <>
-      <div className="flex flex-col items-start mt-2">
-        <label className="text-lg">Start with</label>
-        <input
-          className="p-2 my-2 rounded-lg px-2 w-full"
-          placeholder="e.g. al"
-          type="text"
-          value={startWith}
-          onChange={(e) => setStartWith(e.target.value.toLowerCase())}
-          onInput={(e: React.FormEvent<HTMLInputElement>) => {
-            const target = e.target as HTMLInputElement;
-            target.value = target.value.replace(/[^a-zA-Z]/g, "");
-          }}
-        />
+      <div className="flex items-start gap-2 mt-2">
+        <div className="flex flex-col items-start">
+          <label className="text-lg">Start with</label>
+          <input
+            className="p-2 my-2 rounded-lg px-2 w-full"
+            placeholder="e.g. al"
+            type="text"
+            value={startWith}
+            onChange={(e) => setStartWith(e.target.value.toLowerCase())}
+            onInput={(e: React.FormEvent<HTMLInputElement>) => {
+              const target = e.target as HTMLInputElement;
+              target.value = target.value.replace(/[^a-zA-Z]/g, "");
+            }}
+          />
+        </div>
+        <div className="flex flex-col items-start">
+          <label className="text-lg">End with</label>
+          <input
+            className="p-2 my-2 rounded-lg px-2 w-full"
+            placeholder="e.g. ly"
+            type="text"
+            value={endWith}
+            onChange={(e) => setEndWith(e.target.value.toLowerCase())}
+            onInput={(e: React.FormEvent<HTMLInputElement>) => {
+              const target = e.target as HTMLInputElement;
+              target.value = target.value.replace(/[^a-zA-Z]/g, "");
+            }}
+          />
+        </div>
       </div>
+
+      {/* excluded */}
       <div className="flex flex-col items-start mt-2">
-        <label className="text-lg">End with</label>
+        <label className="text-lg">Exclude Characters</label>
         <input
           className="p-2 my-2 rounded-lg px-2 w-full"
-          placeholder="e.g. ly"
+          placeholder="e.g. fpqx excludes f, p, q, x"
           type="text"
-          value={endWith}
-          onChange={(e) => setEndWith(e.target.value.toLowerCase())}
+          value={exclude.join(",")}
+          onChange={(e) => setExclude(e.target.value.toLowerCase().split(","))}
           onInput={(e: React.FormEvent<HTMLInputElement>) => {
             const target = e.target as HTMLInputElement;
-            target.value = target.value.replace(/[^a-zA-Z]/g, "");
+            target.value = target.value.replace(/[^a-zA-Z,]/g, "");
           }}
         />
       </div>
