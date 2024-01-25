@@ -8,8 +8,8 @@ const font = Font({
 });
 
 export const metadata: Metadata = {
-  title: "App Name Generator",
-  description: "Generate a random unique name for your project.",
+  title: "Random Name Generator",
+  description: "Generate a random unique names.",
 }
 
 export default function RootLayout({
