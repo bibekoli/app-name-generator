@@ -120,17 +120,6 @@ export default function Generate() {
         />
       </div>
 
-      <div className="flex flex-col items-start mt-2">
-        <label className="text-lg">Result</label>
-        <input
-          className="p-2 my-2 rounded-lg px-2 w-full"
-          placeholder="alxly"
-          type="text"
-          value={result}
-          readOnly
-        />
-      </div>
-
       <div className="flex flex-row items-center mt-2 gap-2">
         <input
           className="p-2 my-2 rounded-lg px-2"
@@ -139,6 +128,10 @@ export default function Generate() {
           onChange={(e) => setAllowRepeat(e.target.checked)}
         />
         <label className="text-lg">Allow Character Repeat</label>
+      </div>
+
+      <div className="flex justify-center mt-8 mb-4">
+        <p className="text-4xl font-bold">{result}</p>
       </div>
 
       <div className="flex flex-row gap-2 justify-center mt-2">
